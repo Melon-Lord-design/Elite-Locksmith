@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elite Locksmith</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <h1 class="logo">Elite Locksmith</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-text">
+      <h2>Emergency Locksmith Services</h2>
+      <p><em>Your key to peace of mind</em></p>
+      <p>Fast • Reliable • Professional</p>
+      <button onclick="scrollToContact()">Request Assistance</button>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="service-grid">
+        <div class="service-card">Emergency Lockout</div>
+        <div class="service-card">Home Lock Installation</div>
+        <div class="service-card">Commercial Security Systems</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section dark-bg">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>Elite Locksmith offers premium locksmith services. We're available around the clock, whether you're locked out or upgrading your security, we're here to help.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <form 
+      id="contactForm" 
+      class="contact-form"
+      action="https://formspree.io/f/mvgqlpny"
+      method="POST"
+    >
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+        <div id="formMessage" class="form-message"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Elite Locksmith. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
