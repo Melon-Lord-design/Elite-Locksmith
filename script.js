@@ -6,21 +6,24 @@ function scrollToContact() {
 // Dynamic Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Contact form handler with Formspree
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-  e.preventDefault();
+// Contact form handler
+const form = document.getElementById('contactForm');
+const feedback = document.getElementById('formMessage');
 
-  const form = this;
-  const feedback = document.getElementById('formMessage');
-  const data = new FormData(form);
+form.addEventListener('submit', function (e) {
+  e.preventDefault(); // stop default submission
 
-  feedback.textContent = "";
-  feedback.style.color = "";
+  const formData = new FormData(form);
+
+  feedback.textContent = "Sending...";
+  feedback.style.color = "white";
 
   fetch(form.action, {
     method: "POST",
-    body: data,
-    headers: { 'Accept': 'application/json' }
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
   })
   .then(response => {
     if (response.ok) {
@@ -30,7 +33,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     } else {
       response.json().then(data => {
         if (data.errors) {
-          feedback.textContent = data.errors.map(error => error.message).join(", ");
+          feedback.textContent = data.errors.map(err => err.message).join(", ");
         } else {
           feedback.textContent = "Oops! There was a problem submitting your form.";
         }
@@ -38,8 +41,8 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
       });
     }
   })
-  .catch(error => {
-    feedback.textContent = "Oops! There was a network error.";
+  .catch(() => {
+    feedback.textContent = "Network error. Please try again later.";
     feedback.style.color = "red";
   });
 });
