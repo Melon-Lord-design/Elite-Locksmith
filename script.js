@@ -6,22 +6,40 @@ function scrollToContact() {
 // Dynamic Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Contact form handler
+// Contact form handler with Formspree
 document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
+  const form = this;
   const feedback = document.getElementById('formMessage');
+  const data = new FormData(form);
 
-  if (!name || !email || !message) {
-    feedback.textContent = "Please fill in all fields.";
+  feedback.textContent = "";
+  feedback.style.color = "";
+
+  fetch(form.action, {
+    method: "POST",
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(response => {
+    if (response.ok) {
+      feedback.textContent = "Thank you! We'll get back to you soon.";
+      feedback.style.color = "limegreen";
+      form.reset();
+    } else {
+      response.json().then(data => {
+        if (data.errors) {
+          feedback.textContent = data.errors.map(error => error.message).join(", ");
+        } else {
+          feedback.textContent = "Oops! There was a problem submitting your form.";
+        }
+        feedback.style.color = "red";
+      });
+    }
+  })
+  .catch(error => {
+    feedback.textContent = "Oops! There was a network error.";
     feedback.style.color = "red";
-    return;
-  }
-
-  feedback.textContent = "Thank you! We'll get back to you soon.";
-  feedback.style.color = "limegreen";
-  this.reset();
+  });
 });
