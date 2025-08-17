@@ -53,9 +53,9 @@
     <div class="container">
       <h2>Contact Us</h2>
       <form id="contactForm" action="https://formspree.io/f/mvgqlpny" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="_replyto" placeholder="Your Email" required />
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <input type="text" name="name" id="name" placeholder="Your Name" required />
+        <input type="email" name="_replyto" id="email" placeholder="Your Email" required />
+        <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
         <button type="submit">Send Message</button>
         <div id="formMessage" class="form-message"></div>
       </form>
@@ -71,6 +71,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
