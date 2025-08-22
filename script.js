@@ -1,24 +1,44 @@
 // script.js
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Select all service cards
+  // ---- Service Card Animation ----
   const serviceCards = document.querySelectorAll(".service-card");
 
-  // Create an IntersectionObserver to watch when elements appear in view
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Add the "visible" class when the card is in view
         entry.target.classList.add("visible");
-
-        // Once visible, stop observing (optional, for performance)
-        observer.unobserve(entry.target);
+        observer.unobserve(entry.target); // stop observing after visible
       }
     });
-  }, { threshold: 0.2 }); // trigger when 20% of the card is visible
+  }, { threshold: 0.2 });
 
-  // Tell the observer to watch each service card
-  serviceCards.forEach(card => {
+  serviceCards.forEach((card) => {
     observer.observe(card);
   });
+
+  // ---- Hamburger Menu ----
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("navLinks");
+  const navItems = navLinks.querySelectorAll("a");
+
+  // Toggle menu and animate burger
+  burger.addEventListener("click", () => {
+    navLinks.classList.toggle("active"); // show/hide menu
+    burger.classList.toggle("toggle");   // animate hamburger to X
+  });
+
+  // Close menu when clicking a nav link
+  navItems.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+      burger.classList.remove("toggle");
+    });
+  });
 });
+
+// ---- Request Assistance Button Scroll ----
+function scrollToContact() {
+  const contactSection = document.getElementById("contact");
+  contactSection.scrollIntoView({ behavior: "smooth" });
+}
